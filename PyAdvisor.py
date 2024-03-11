@@ -1,5 +1,11 @@
 import requests
 import base64
+from rich.console import Console
+from rich.text import Text
+from rich.markdown import Markdown
+
+console = Console()
+
 
 def fetch_github_data(username, access_token):
     user_url = f"https://api.github.com/users/{username}"
@@ -49,26 +55,50 @@ def fetch_github_data(username, access_token):
 
             return user_info, repo_data
         else:
-            print(
-                f"Failed to fetch user data: {user_response.status_code} - {user_response.reason}"
+            console.print(
+                f"Failed to fetch user data: {user_response.status_code} - {user_response.reason}",
+                style="bold red",
             )
             return None, None
     except Exception as e:
-        print(f"An error occurred: {e}")
+        console.print(f"An error occurred: {e}", style="bold red")
         return None, None
 
 
-username = input("Enter your username: ")
-print("-" * 50)
-access_token = input("Enter your access token: ")
-print("-" * 50) 
+console.print(
+    Text(
+        "PyAdvisor - Your Career Advisor Based On Your Github & Given Info",
+        style="bold green",
+    )
+)
+console.print("=" * 65)
+print()
+username = console.input(Text("Enter your github username: ", style="bold magenta"))
+console.print("-" * 50)
+access_token = console.input(
+    Text("Enter your github access token: ", style="bold magenta")
+)
+console.print("-" * 50)
+console.print("Fetching your Github data...", style="bold green")
+console.print("-" * 50)
 user_info, repositories = fetch_github_data(username, access_token)
-user_skills = input("Enter your skills (comma-separated): ").split(",")
-print("-" * 50)
-user_interests = input("Enter your interests (comma-separated): ").split(",")
-print("-" * 50)
-user_goals = input("Enter your goals (comma-separated): ").split(",")
-print("-" * 50)
+if user_info is None or repositories is None:
+    console.print("Exiting...", style="bold red")
+    exit()
+user_skills = console.input(
+    Text("Enter your skills (comma-separated): ", style="bold magenta")
+).split(",")
+console.print("-" * 50)
+user_interests = console.input(
+    Text("Enter your interests (comma-separated): ", style="bold magenta")
+).split(",")
+console.print("-" * 50)
+user_goals = console.input(
+    Text("Enter your goals (comma-separated): ", style="bold magenta")
+).split(",")
+console.print("-" * 50)
+console.print("Information received! Generating results...", style="bold green")
+
 
 # Now the Machine Learning part
 
@@ -95,29 +125,32 @@ repo_readmes_str = (
 )
 
 user_messages = [
-    "You are a helpful assistant.",
     f"Hello, I'm {user_name}. I'm interested in {', '.join(user_interests)} and my goal is to become an {', '.join(user_goals)}.",
-    "That's great! How can I assist you today?",
     f"I have skills in {', '.join(user_skills)}, and I'm also working on some projects related to {', '.join(repo_names_str)}. I'd like to get some advice on how to improve my skills and projects for my future to reach my goals.",
-    "Fantastic! I can help you with that. Provide me more details about your projects and skills.",
     f"Here is some info from my Github: {user_bio}, my repo descriptions: {', '.join(repo_descriptions_str)}",
-    "Now suggest me some projects, languages to learn in future and from the data given above advice to achieve my goals based on my skills and interests",
+    f"Now suggest me some projects to do in future based on my interests: {', '.join(user_interests)} , languages to learn in future to improve my skills: {', '.join(user_skills)} and from the data given above advice to achieve my goals based on my skills and interests.",
+    "Give the output in a structured format so that I can understand it easily. with the Heading as "
+    "PyAdvisor Output"
+    " and the output in a structured format.",
 ]
 
 from text_generation import InferenceAPIClient
 
-client = InferenceAPIClient("mistralai/Mistral-7B-Instruct-v0.2")
+client = InferenceAPIClient("mistralai/Mixtral-8x7B-Instruct-v0.1")
 user_messages_str = "\n".join(user_messages)
 
 import retrying
+
 
 @retrying.retry(wait_fixed=2000, stop_max_attempt_number=3)
 def generate_text():
     text = client.generate(user_messages_str, max_new_tokens=1500).generated_text
     return text
 
+
 try:
     text = generate_text()
-    print(text)
+    markdown_text = Markdown(text)
+    console.print(markdown_text)
 except Exception as e:
-    print(f"An error occurred: {e}")
+    console.print(f"An error occurred: {e}")
