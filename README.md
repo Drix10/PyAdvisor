@@ -46,7 +46,7 @@ python PyAdvisor.py
 
 ## 🚀 Step 4: Generating Results
 
-Once all information is provided, PyAdvisor will process your data and generate personalized career advice based on your Github profile and input.
+**Once all information is provided, PyAdvisor will process your data and generate personalized career advice based on your Github profile and input.**
 
 ![Example](https://github.com/Drix10/PyAdvisor/blob/main/pyadvisor.png?raw=true)
 
