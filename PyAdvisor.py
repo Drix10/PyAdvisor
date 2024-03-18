@@ -3,8 +3,14 @@ import base64
 from rich.console import Console
 from rich.text import Text
 from rich.markdown import Markdown
+import warnings
+from pydantic import BaseModel, Field
 
 console = Console()
+
+
+class CustomField(BaseModel):
+    model_id: str = Field(...)
 
 
 def fetch_github_data(username, access_token):
@@ -65,6 +71,11 @@ def fetch_github_data(username, access_token):
         return None, None
 
 
+# Suppress specific UserWarning
+warnings.filterwarnings(
+    "ignore", message='Field "model_id" has conflict with protected namespace "model_".'
+)
+
 console.print(
     Text(
         "PyAdvisor - Your Career Advisor Based On Your Github & Given Info",
@@ -98,7 +109,6 @@ user_goals = console.input(
 ).split(",")
 console.print("-" * 50)
 console.print("Information received! Generating results...", style="bold green")
-
 
 # Now the Machine Learning part
 
@@ -135,11 +145,10 @@ user_messages = [
 ]
 
 from text_generation import InferenceAPIClient
+import retrying
 
 client = InferenceAPIClient("mistralai/Mixtral-8x7B-Instruct-v0.1")
 user_messages_str = "\n".join(user_messages)
-
-import retrying
 
 
 @retrying.retry(wait_fixed=2000, stop_max_attempt_number=3)
