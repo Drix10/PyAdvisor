@@ -101,32 +101,8 @@ username = console.input(Text("Enter your GitHub username: ", style="bold magent
 speak("Now, we will open a webpage for you to generate an access token.")
 
 webbrowser.open("https://github.com/settings/tokens?type=beta")
-time.sleep(4) 
-speak("As you can see this is the page where we will be generating your github access token, to start please click on generate new token button at top right of the webpage")
-time.sleep(3)
 
-speak("If you have nto verified your identity  you may see a pop up which tells you to  enter your github password, please enter your account password and verify yourself")
-time.sleep(5)
-
-speak("Now you  will be able to see a page where it says New fine-grained personal access token. Here lets start by giving a name to your token. Please give a name to your token for example:- Iris")
-time.sleep(5)
-
-speak("Next we have a Expiration date selection, which means when the token will get expired, please choose this as per your comfort the minimum Expiration limit is 7 days")
-time.sleep(3)
-
-speak("If you want to give any sort of description to the token you may carry forward or you can leave it blank aswell")
-time.sleep(4)
-
-speak("In the Repository access seaction please choose Public Repositories (read-only) option.")
-time.sleep(2)
-
-speak("You are all set to generate your token please click on generate token option and copy the token")
-time.sleep(3)
-
-speak("Please head back to VS code")
-time.sleep(2)
-
-speak("Please paste your Github access token that you copied earlier")
+speak("Please paste your Github access token  from the webpage earlier")
 access_token = console.input(Text("Enter your GitHub access token: ", style="bold magenta"))
 
 speak("Fetching your GitHub data...")
