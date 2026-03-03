@@ -53,4 +53,4 @@ python PyAdvisor.py
 ## 🚀 Additional Notes
 
 - **Privacy:** Your Github access token is only used to fetch data from your profile and is not stored or shared anywhere.
-- **Feedback:** I welcome any feedback or suggestions for improving PyAdvisor. For any issues contact me on discord: [@drix10](https://discord.com/users/954367061222633472).
+- **Feedback:** I welcome any feedback or suggestions for improving PyAdvisor. For any issues contact me on discord: [@drix10](https://discord.com/users/954367061222633472)
