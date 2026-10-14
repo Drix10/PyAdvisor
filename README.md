@@ -1,4 +1,8 @@
-# PyAdvisor - [Star 🌟 & Follow]
+# PyAdvisor: AI Career Advisor From Your GitHub Profile
+
+**PyAdvisor is a Python command-line career advisor.** It reads your GitHub profile (repositories, languages, activity) plus a few answers from you, and uses a Hugging Face model to suggest the skills, projects and learning paths to work on next.
+
+⭐ Star the repo and follow [@Drix10](https://github.com/Drix10) if it helps you.
 - **Welcome to PyAdvisor, your personal career advisor tailored to your Github profile and provided information. Follow the steps below to get started:**
 
 ## 🚀 Step 1: Setup
@@ -54,3 +58,17 @@ python PyAdvisor.py
 
 - **Privacy:** Your Github access token is only used to fetch data from your profile and is not stored or shared anywhere.
 - **Feedback:** I welcome any feedback or suggestions for improving PyAdvisor. For any issues contact me on discord: [@drix10](https://discord.com/users/954367061222633472)
+
+
+<!-- drix10-footer -->
+---
+
+<div align="center">
+
+**Built by [Drishtant Ghosh (Drix10)](https://drix10.com)** · AI systems engineer and 1x acquired founder, Bengaluru
+
+[Portfolio](https://drix10.com) · [LinkedIn](https://www.linkedin.com/in/drix10) · [X](https://x.com/DrishtantGhosh) · [Blog](https://blogs.drix10.com) · [All projects](https://github.com/Drix10)
+
+<sub>More from Drix10: [Agent Flow](https://github.com/Drix10/agent-flow) (guardrails for AI coding agents) · [MiroHedge](https://github.com/Drix10/hypothesis-arena) (AI-assisted systematic fund) · [Guardian](https://github.com/Drix10/guardian-gpt) (UPI scam interceptor) · [Sentinel](https://github.com/Drix10/sentinal) (AI security CLI) · [Keystroke-LLM](https://github.com/Drix10/keystroke-llm) (NumPy transformer on a keyboard) · [AI Resources](https://github.com/Drix10/ai-resources) (daily AI knowledge base)</sub>
+
+</div>
